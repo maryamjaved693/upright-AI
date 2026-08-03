@@ -25,13 +25,12 @@ export function AlertBanner({ alerting }: AlertBannerProps) {
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 1000,
-        fontFamily: 'sans-serif',
-        background: '#ff1744',
-        color: '#fff',
-        borderRadius: 10,
+        fontFamily: 'var(--sans)',
+        background: 'var(--red)',
+        color: '#012624',
+        borderRadius: 16,
         padding: '14px 22px',
         maxWidth: 480,
-        boxShadow: '0 6px 24px rgba(0,0,0,0.35)',
         animation: 'posture-alert-pop 200ms ease-out',
       }}
     >

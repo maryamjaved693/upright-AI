@@ -1,22 +1,35 @@
 :root {
-  --bg: #0d0e12;
-  --surface: #16181f;
-  --surface-alt: #1d2028;
-  --border: #2a2d38;
-  --text: #e6e8ee;
-  --text-dim: #9099ab;
-  --text-faint: #6b7280;
-  --green: #00e676;
-  --red: #ff1744;
-  --yellow: #f9a825;
-  --gray: #6b7280;
+  /* Auros — surface stack */
+  --bg: #012624; /* liquid abyss */
+  --bg-deep: #011d1c; /* liquid deep (recessed) */
+  --surface: #003734; /* liquid kelp (raised card) */
+  --surface-alt: #003734;
+  --border: rgba(255, 255, 255, 0.1);
+  --slate: #707777;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* text */
+  --text: #ffffff; /* platinum — headings/emphasis */
+  --text-dim: #bbc7c6; /* silver mist — body */
+  --text-mist: #edfffe; /* liquid mist — emphasized body/labels */
+  --text-faint: #707777; /* slate deep — tertiary */
+
+  /* accents */
+  --pink: #fde9ff; /* lavender phosphor — stats/highlights only */
+  --gradient: linear-gradient(90deg, rgb(0, 130, 124) 0%, rgb(203, 255, 252) 100%);
+  --gradient-aurora: linear-gradient(90deg, rgb(203, 255, 252) 0%, rgb(237, 255, 254) 26.25%, rgb(255, 253, 250) 47.57%, rgb(250, 209, 255) 88.96%);
+
+  /* functional status accents (kept outside the strict palette for legibility of alerts) */
+  --green: #4dd8c8;
+  --red: #ff5c7a;
+  --yellow: #f9c74f;
+  --gray: var(--slate);
+
+  --sans: 'DM Sans', 'Inter', ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 15px/145% var(--sans);
+  font: 400 15px/1.4 var(--sans);
   color-scheme: dark;
-  color: var(--text);
+  color: var(--text-dim);
   background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,7 +44,7 @@
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--text);
+  color: var(--text-dim);
 }
 
 #root {
@@ -40,7 +53,8 @@ body {
 
 h1, h2, h3 {
   font-family: var(--sans);
-  font-weight: 600;
+  font-weight: 500;
+  line-height: 1;
   color: var(--text);
   margin: 0;
 }
@@ -50,26 +64,41 @@ p {
 }
 
 a {
-  color: var(--text);
+  color: var(--text-dim);
 }
 
 button {
   font-family: var(--sans);
-  background: var(--surface-alt);
+  background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 8px 14px;
+  padding: 10px 16px;
   font-size: 13px;
   cursor: pointer;
+  transition: border-color 150ms ease, opacity 150ms ease;
 }
 
 button:hover {
-  border-color: var(--text-dim);
+  border-color: var(--slate);
+}
+
+button.btn-primary {
+  background: var(--gradient-aurora);
+  color: #222222;
+  border: none;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+}
+
+button.btn-primary:hover {
+  opacity: 0.92;
 }
 
 input[type='range'] {
-  accent-color: var(--green);
+  accent-color: var(--pink);
 }
 
 details summary {
@@ -92,7 +121,7 @@ details summary::marker {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 20px 16px;
+  padding: 24px 16px;
   border-bottom: 1px solid var(--border);
   text-align: left;
 }
@@ -100,21 +129,25 @@ details summary::marker {
 .brand-mark {
   width: 32px;
   height: 32px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, var(--green), #00b0ff);
+  border-radius: 6px;
+  background: var(--gradient);
   flex-shrink: 0;
 }
 
 .brand-name {
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 .brand-tagline {
-  font-size: 12px;
-  color: var(--text-faint);
-  margin-top: -2px;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-top: 2px;
 }
 
 /* Below the header: centered main column + sidebar for secondary features */
@@ -123,7 +156,7 @@ details summary::marker {
   justify-content: center;
   flex: 1;
   gap: 24px;
-  padding: 24px;
+  padding: 32px 24px;
 }
 
 .main {
@@ -132,7 +165,7 @@ details summary::marker {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
 }
 
 .main-status-row {
@@ -151,10 +184,10 @@ details summary::marker {
 .sidebar {
   width: 320px;
   flex-shrink: 0;
-  background: var(--surface);
+  background: var(--bg-deep);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -166,19 +199,19 @@ details summary::marker {
 }
 
 .card {
-  background: var(--surface-alt);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 16px;
+  border-radius: 16px;
+  padding: 16px 20px;
 }
 
 .card-title {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--text-dim);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 900px) {

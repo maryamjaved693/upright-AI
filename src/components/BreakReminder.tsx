@@ -36,7 +36,7 @@ export function BreakReminder({ dueForBreak, remainingMs, onAcknowledge }: Break
         Break timer
       </div>
       <span style={{ fontSize: 13 }}>Time to stand up and stretch — you've been sitting a while.</span>
-      <button type="button" onClick={onAcknowledge} style={{ alignSelf: 'flex-start' }}>
+      <button type="button" className="btn-primary" onClick={onAcknowledge} style={{ alignSelf: 'flex-start' }}>
         I stood up
       </button>
     </div>

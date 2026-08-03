@@ -8,7 +8,7 @@ interface SoundToggleProps {
 // before audio can play, so this button is that gesture.
 export function SoundToggle({ enabled, onToggle }: SoundToggleProps) {
   return (
-    <button type="button" onClick={onToggle}>
+    <button type="button" className={enabled ? undefined : 'btn-primary'} onClick={onToggle}>
       {enabled ? 'Sound: On' : 'Enable Sound Alerts'}
     </button>
   );

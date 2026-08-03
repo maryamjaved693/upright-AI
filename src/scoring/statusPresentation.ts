@@ -5,9 +5,9 @@ import type { OverallStatus } from './sustainedAlertTracker';
 export type StatusColorKey = 'gray' | 'green' | 'red';
 
 export const STATUS_COLORS: Record<StatusColorKey, string> = {
-  gray: '#9e9e9e',
-  green: '#00e676',
-  red: '#ff1744',
+  gray: '#707777',
+  green: '#4dd8c8',
+  red: '#ff5c7a',
 };
 
 export function resolveStatus(overall: OverallStatus): { color: StatusColorKey; label: string } {

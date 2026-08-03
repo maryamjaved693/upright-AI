@@ -32,10 +32,10 @@ export function WebcamPoseView({ videoRef, status: webcamStatus, error: webcamEr
         width: 640,
         height: 480,
         maxWidth: '100%',
-        borderRadius: 12,
+        borderRadius: 16,
         overflow: 'hidden',
         border: '1px solid var(--border)',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+        background: 'var(--surface)',
       }}
     >
       <video
@@ -54,9 +54,9 @@ export function WebcamPoseView({ videoRef, status: webcamStatus, error: webcamEr
           bottom: 0,
           left: 0,
           right: 0,
-          padding: '6px 10px',
-          background: 'rgba(13,14,18,0.75)',
-          color: '#fff',
+          padding: '8px 12px',
+          background: 'rgba(1,29,28,0.85)',
+          color: 'var(--text-mist)',
           fontFamily: 'var(--mono)',
           fontSize: 11,
         }}
