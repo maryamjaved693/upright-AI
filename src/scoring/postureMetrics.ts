@@ -34,6 +34,14 @@ const MIN_VISIBILITY = 0.5;
 // can score above 0.5 confidence despite being garbage. A higher bar
 // plus the below-shoulders sanity check filters most of that out.
 const MIN_HIP_VISIBILITY = 0.7;
+// Shoulders are load-bearing for every metric (neck drop, torso, "too
+// close" all key off shoulder position/width), so they get the same
+// stricter bar as hips: a hand or other object blocking the camera can
+// make MediaPipe emit a guessed shoulder pose that still clears 0.5
+// confidence, and a guessed pose tends to read as artificially narrow
+// (shoulderWidthNorm shrinks), which falsely clears a real "too close"
+// alert almost immediately (recoveryMs is short by design).
+const MIN_SHOULDER_VISIBILITY = 0.7;
 
 function isVisible(lm: Landmark | undefined, minVisibility = MIN_VISIBILITY): lm is Landmark {
   return !!lm && (lm.visibility ?? 1) >= minVisibility;
@@ -57,7 +65,7 @@ export function computeRawMetrics(landmarks: Landmark[]): RawMetrics | null {
   const leftHip = landmarks[POSE_LANDMARKS.LEFT_HIP];
   const rightHip = landmarks[POSE_LANDMARKS.RIGHT_HIP];
 
-  if (!isVisible(leftShoulder) || !isVisible(rightShoulder)) {
+  if (!isVisible(leftShoulder, MIN_SHOULDER_VISIBILITY) || !isVisible(rightShoulder, MIN_SHOULDER_VISIBILITY)) {
     return null;
   }
 

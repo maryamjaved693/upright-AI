@@ -37,6 +37,16 @@ describe('computeRawMetrics', () => {
     expect(computeRawMetrics(landmarks)).toBeNull();
   });
 
+  it('returns null when shoulder visibility is low-confidence but above the general 0.5 bar (e.g. camera occlusion)', () => {
+    // MediaPipe can emit a guessed shoulder pose scoring above the general
+    // 0.5 landmark-visibility bar even when the camera view is blocked
+    // (e.g. a hand in front of the lens) — shoulders need the same
+    // stricter bar as hips so a guessed, artificially narrow pose doesn't
+    // get scored as real and falsely clear a sustained alert.
+    const landmarks = makeLandmarks({ 11: { visibility: 0.6 }, 12: { visibility: 0.6 } });
+    expect(computeRawMetrics(landmarks)).toBeNull();
+  });
+
   it('falls back to nose when ears are not visible', () => {
     const landmarks = makeLandmarks({ 7: { visibility: 0 }, 8: { visibility: 0 } });
     const metrics = computeRawMetrics(landmarks);
